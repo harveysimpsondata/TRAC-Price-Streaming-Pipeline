@@ -23,7 +23,34 @@ Kafka server is pointing to a private server. Change server.properties so it can
 ```bash
 sudo nano /home/ec2-user/kafka_2.12-3.3.1/config/server.properties
 ```
+Change the following lines
+```bash
+advertised.listeners=PLAINTEXT://YOUR_EC2_PUBLIC_IP:9092
+```
+### Start Zookeeper
+```bash
+cd kafka_2.12-3.3.1
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
 
+### Start Kafka Server
+Open another terminal window and ssh into ec2 instance. Run the following command to start kafka server
+```bash
+cd kafka_2.12-3.3.1
+bin/kafka-server-start.sh config/server.properties
+```
+### Create a Topic
+Open another terminal window and ssh into ec2 instance. Run the following command to create a topic
+```bash
+cd kafka_2.12-3.3.1
+bin/kafka-topics.sh --create --topic TOPIC_NAME --bootstrap-server EC2_PUBLIC_IP_ADDRESS:9092 --replication-factor 1 --partitions 1
+```
+
+### Start Producer
+Run the following command to start producer
+```bash
+bin/kafka-console-producer.sh --topic demo_testing2 --bootstrap-server EC2_PUBLIC_IP_ADDRESS:9092
+```
 
 
 
