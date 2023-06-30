@@ -3,7 +3,7 @@
 ### Key
 If using MAC OS use following command to change permission of key file
 ```bash
-sudo chmod 400 ~/.ssh/YOUR_KEY.pem
+sudo chmod 400 YOUR_KEY.pem
 ```
 
 ### Kafka Installation and Setup
