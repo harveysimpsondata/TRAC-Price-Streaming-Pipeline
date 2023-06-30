@@ -19,6 +19,10 @@ Download Java
 ```bash
 sudo yum install java-1.8.0-openjdk
 ```
+NOTE: Java Download For EC3
+```bash
+sudo yum install java-1.8.0-openjdk-devel
+```
 Kafka server is pointing to a private server. Change server.properties so it can run your ec2 public ip address. Before you do that you must add an ec2 security group for incoming traffic to be able to create a broker. I had to change inbounding traffic to all traffic instread of My IP address to prevent connection timeouts. After security changes run this command to configure kafka server. 
 ```bash
 sudo nano /home/ec2-user/kafka_2.12-3.3.1/config/server.properties
@@ -43,14 +47,23 @@ bin/kafka-server-start.sh config/server.properties
 Open another terminal window and ssh into ec2 instance. Run the following command to create a topic
 ```bash
 cd kafka_2.12-3.3.1
-bin/kafka-topics.sh --create --topic TOPIC_NAME --bootstrap-server EC2_PUBLIC_IP_ADDRESS:9092 --replication-factor 1 --partitions 1
+bin/kafka-topics.sh --create --topic TOPIC_NAME --bootstrap-server EC2_PUBLIC_IP:9092 --replication-factor 1 --partitions 1
 ```
 
 ### Start Producer
 Run the following command to start producer
 ```bash
-bin/kafka-console-producer.sh --topic demo_testing2 --bootstrap-server EC2_PUBLIC_IP_ADDRESS:9092
+bin/kafka-console-producer.sh --topic TOPIC_NAME --bootstrap-server EC2_PUBLIC_IP:9092
 ```
+
+### Start Consumer
+Run the following command to start consumer
+```bash
+bin/kafka-console-consumer.sh --topic TOPIC_NAME --bootstrap-server EC2_PUBLIC_IP:9092
+```
+
+
+
 
 
 
