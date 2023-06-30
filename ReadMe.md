@@ -21,7 +21,7 @@ sudo yum install java-1.8.0-openjdk
 ```
 NOTE: Java Download For EC3
 ```bash
-sudo yum install java-1.8.0-openjdk-devel
+sudo yum install java-1.8.0-amazon-corretto
 ```
 Kafka server is pointing to a private server. Change server.properties so it can run your ec2 public ip address. Before you do that you must add an ec2 security group for incoming traffic to be able to create a broker. I had to change inbounding traffic to all traffic instread of My IP address to prevent connection timeouts. After security changes run this command to configure kafka server. 
 ```bash
@@ -38,7 +38,12 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 ### Start Kafka Server
-Open another terminal window and ssh into ec2 instance. Run the following command to start kafka server
+Open another terminal window and ssh into ec2 instance. Run the following command to increase memory for server. This will allocate some amount of memory to kafka server.
+```bash
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+```
+Then run the following command to start kafka server
+
 ```bash
 cd kafka_2.12-3.3.1
 bin/kafka-server-start.sh config/server.properties
