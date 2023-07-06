@@ -20,7 +20,7 @@ I used different technologies such as Python, Amazon Web Services (AWS), Apache 
 
 
 ## Dataset Used
-Coinbase API - https://api.pro.coinbase.com/products/BTC-USD/candles/1m
+Coinbase API - https://api.exchange.coinbase.com/products/TRAC-USD/ticker
 
 
 
